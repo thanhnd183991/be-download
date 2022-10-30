@@ -4,6 +4,7 @@ import org.springframework.core.io.Resource;
 import org.springframework.core.io.UrlResource;
 import org.springframework.web.multipart.MultipartFile;
 import vt.thanhnd58.bedowloadfile.constant.BEConstant;
+import vt.thanhnd58.bedowloadfile.os.OS;
 import vt.thanhnd58.bedowloadfile.os.OSName;
 
 import java.io.*;
@@ -56,16 +57,33 @@ public class FileUtils {
         return System.getProperty("user.dir");
     }
 
+    public static File getCurrentFolderContainAppUsingUserDot() {
+        return new File(".");
+
+    }
+
+    public static String appendSlash() {
+        OSName os = OS.getOS();
+        if(os.equals(OSName.LINUX)){
+           return "/" ;
+        }
+        else {
+           return "\\" ;
+        }
+    }
     public static String getFilePathInFolderContainApp(String fileName) {
         String folder = getCurrentFolderContainAppUsingUserDir();
-        String filePath = folder + "\\" + fileName;
+//        String folder = getCurrentFolderContainAppUsingUserDot().getAbsolutePath();
+        String filePath = folder + appendSlash() + fileName;
         File file = new File(filePath);
         try {
             file.createNewFile();
         } catch (IOException e) {
             e.printStackTrace();
         }
-        return folder + "\\" + fileName;
+        System.out.println("filePath "+ filePath);
+
+        return filePath;
     }
 
 

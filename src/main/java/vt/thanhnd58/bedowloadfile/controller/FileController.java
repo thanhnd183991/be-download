@@ -163,7 +163,7 @@ public class FileController {
         }
         versionDTO.setNewVersion((String) versionProps.get("version" + os.toString()));
         versionDTO.setOsName(os);
-        versionDTO.setSize(Long.valueOf((String) versionProps.get("size" + os.toString())));
+//        versionDTO.setSize(Long.valueOf((String) versionProps.get("size" + os.toString())));
         versionDTO.setRequired(Boolean.valueOf((String) versionProps.get("required" + os.toString())));
         return ResponseEntity.ok(versionDTO);
 
